@@ -41,12 +41,26 @@ void play_game(int max_num) {
 }
 // option 2
 // change default value
+int value_change() {
+    int input;
+    do {
+        printf("Enter max value: ");
+        scanf("%d", &input);
+        if (input < 0 || input > INT_MAX) {
+            printf("Invalid input!\n");
+        } else {
+            break;
+        }
+        while(getchar() != '\n');
+    } while (1);
+    return input;
+}
 
 // option 3
 // thank you for playing game
 // return 0
 
 int main() {
-    
+
     return EXIT_SUCCESS;
 }
