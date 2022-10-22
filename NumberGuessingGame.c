@@ -4,8 +4,6 @@
 #include <time.h>
 #include <limits.h>
 #include <string.h>
-// initialize default value for max number
-// menu 1. play game 2. change max number 3. quit
 
 // option 1
 // loop until input == q
@@ -56,11 +54,31 @@ int value_change() {
     return input;
 }
 
-// option 3
-// thank you for playing game
-// return 0
+
 
 int main() {
+    // initialize default value for max number
+    // menu 1. play game 2. change max number 3. quit
+    int max_num = 10;
+    int option;
+    printf("Press 1 to play a game\nPress 2 to change the max number\nPress 3 to quit\n: ");
+    scanf("%d", &option);
+    while(getchar() != '\n');
+    do {
+        printf("Press 1 to play a game\nPress 2 to change the max number\nPress 3 to quit\n: ");
+        scanf("%d", &option);
+        if (option == 1) {
+            play_game(max_num);
+        } else if (option == 2) {
+            // option 2
+            // change default value
+            max_num = value_change(max_num);
+        }
+        while(getchar() != '\n');
+    } while (option != 3);
 
+    // option 3
+    // thank you for playing game
+    printf("Thank you for playing the game!\n");
     return EXIT_SUCCESS;
 }
