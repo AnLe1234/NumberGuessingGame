@@ -13,7 +13,6 @@ void play_game(int max_num) {
     time_t t;
     srand((unsigned)time(&t));
     int rand_value = rand() % max_num;
-    printf("Random: %d\n", rand_value);
 
     char input[10];
 
@@ -61,9 +60,6 @@ int main() {
     // menu 1. play game 2. change max number 3. quit
     int max_num = 10;
     int option;
-    printf("Press 1 to play a game\nPress 2 to change the max number\nPress 3 to quit\n: ");
-    scanf("%d", &option);
-    while(getchar() != '\n');
     do {
         printf("Press 1 to play a game\nPress 2 to change the max number\nPress 3 to quit\n: ");
         scanf("%d", &option);
