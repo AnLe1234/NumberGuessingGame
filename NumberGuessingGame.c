@@ -38,7 +38,7 @@ void play_game(int max_num) {
 }
 // option 2
 // change default value
-int value_change() {
+int value_change(FILE *fptr) {
     int input;
     do {
         printf("Enter max value: ");
@@ -50,6 +50,13 @@ int value_change() {
         }
         while(getchar() != '\n');
     } while (1);
+    // write value to file
+    fptr = fopen("max_value","w");
+    if (fptr == NULL) {
+      printf("Error!");
+      return EXIT_FAILURE;
+    }
+    fprintf(fptr,"%d",input);
     return input;
 }
 
@@ -57,9 +64,19 @@ int value_change() {
 
 int main() {
     // initialize default value for max number
-    // menu 1. play game 2. change max number 3. quit
-    int max_num = 10;
+    int max_num;
     int option;
+    // menu 1. play game 2. change max number 3. quit
+    // check if file exist
+    FILE *fptr;
+    if ((fptr = fopen("max_value","r")) == NULL) {
+        //default if not found
+        max_num = 10;
+    } else {
+        //read from file
+        fscanf(fptr,"%d", &max_num);
+    }
+
     do {
         printf("Press 1 to play a game\nPress 2 to change the max number\nPress 3 to quit\n: ");
         scanf("%d", &option);
@@ -68,7 +85,7 @@ int main() {
         } else if (option == 2) {
             // option 2
             // change default value
-            max_num = value_change(max_num);
+            max_num = value_change(fptr);
         }
         while(getchar() != '\n');
     } while (option != 3);
@@ -76,5 +93,6 @@ int main() {
     // option 3
     // thank you for playing game
     printf("Thank you for playing the game!\n");
+    fclose(fptr);
     return EXIT_SUCCESS;
 }
